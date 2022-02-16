@@ -1,0 +1,122 @@
+body, html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+h1,h2,h3,h4,h5{
+    margin: 0;
+}
+
+header{
+    height: 75px;
+    max-width: 100%;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    place-items: center;
+}
+
+header img{
+    max-height: 75px;
+}
+
+.cart_header ion-icon,
+.menu_header ion-icon{
+    font-size: 3em;
+}
+
+.listening{
+    min-height: 20px;
+    max-height: 20px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+
+}
+.listening h4{
+
+    color: aquamarine;
+    font-size: 15px;
+    margin: 0;
+}
+
+.player_container{
+    height: 420px;
+    background-color: black;
+    padding: 15px;
+}
+
+.player_header{
+
+
+    max-height: 25px;
+    min-height: 25px;
+    background-color: black;
+    color: aquamarine;
+    display: flex;
+    flex-direction: row;
+justify-content: space-between;
+
+}
+
+.player_header h4{
+    margin: 0;
+}
+.player_buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.track_container{
+
+   background-image: url("../assets/IMG_4024.jpg");
+    background-size: 390px 390px;
+
+
+}
+
+.track{
+
+    height: 120px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+}
+
+.track_image{
+    width: 33%;
+}
+.track .track_image img{
+max-width: 120px;
+}
+
+.track_info{
+
+
+    width: 66.5%;
+}
+
+.track_info .info_header{
+    opacity: 1;
+    background-image: linear-gradient(to right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #929ae2, #8a9ae4, #819ae5, #808fe2, #8284de, #8578d8, #8a6bd1);
+    height: 20px;
+    padding-left: 10px;
+}
+.info_body{
+    height: 90px;
+
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px 5px 10px;
+}
+.info_body h5{
+    opacity: 1;
+}

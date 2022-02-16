@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+*{
+    font-family: Ubuntu;
+
+    box-sizing: border-box;
+
+}
+:root{
+    --blue: #287bff;
+    --black1: #222;
+    --black2:  #999;
+    --grey: #f5f5f5
+}
+body, html
+{
+    padding: 0;
+    margin: 0;
+    overflow-scrolling: unset;
+}
+.container
+{
+    width: 100%;
+    overflow: -moz-hidden-unscrollable;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+
+.main{
+    position: absolute;
+    width: 100%;
+
+    min-height: 100vh;
+    background: #F0F0F1;
+    transition: 0.5s;
+}
+.topbar
+{
+    width: 100%;
+    position: fixed;
+    height: 75px;
+    padding: 3px 40px 25px 40px;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.topbar button
+{
+    height: 48px;
+}
+
+.wrap
+{
+    margin-top: 100px;
+    padding: 30px 50px 50px 50px;
+}
+
+.actions
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+.actions .create
+{
+    height: 48px;
+    margin-bottom: 20px;
+}
+
+.actions .create button
+{
+    height: 100%;
+}
+
+.customers_dropdown
+{
+    width: 400px;
+}
+
+.customers_select
+{
+    width: 100%;
+    height: 48px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.customers_table_actions
+{
+    padding:  0 30px 0 30px;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.customers_table_actions input
+{
+    height: 38px;
+    width: 90%;
+}
+
+.customers_table_actions button
+{
+    height: 38px;
+    width: 80px;
+}
+.customers_table_left
+{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.customers_table thead th
+{
+    background-color: #E0E0E0;
+}
+
+.customers_table thead th
+{
+    text-align: left;
+}
+
+.border_bottom
+{
+    border-bottom: 1px solid grey;
+}
+
+.border_top
+{
+    border-top: 1px solid grey;
+}
+.check-column
+{
+    width: 3ch;
+
+    padding: 1em 0em 1em 1em!important;
+}
+
+
+.column_title
+{
+    width: 15ch;
+    text-align: left;
+}
+
+.column-order_date
+{
+    width: 10ch;
+    text-align: left;
+}
+
+.column-order_status
+{
+    text-align: left;
+    width: 14ch;
+}
+.column-order_total
+{
+    width: 5ch;
+    text-align: right;
+}
+.wrap table tbody tr:nth-child(even)
+{
+    background-color: #fff;
+}
+
+.wrap table tbody tr td ion-icon
+{
+
+    float: right;
+}
+.wrap table tbody tr td ion-icon:hover
+{
+    cursor: pointer;
+}
+.wrap table
+{
+    clear: both;
+    width: 100%;
+    border: 1px solid grey;
+}
+
+.wrap table thead
+{
+    background: white;
+
+    border: 1px solid grey;
+
+}
+
+
+.wrap .orders_table thead th,
+.wrap .orders_table tbody td,
+.wrap .orders_table tfoot th
+{
+    padding: 0.75em 1em;
+}
+
+.waiting_data{
+    display: none;
+    position: absolute;
+    top: 40%; right: 50%;
+    transform: translate(50%,-50%);
+    height: 420px;
+    width: 500px !important;
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 120px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 35px;
+    z-index: 301;
+}
+
+.greybackground{
+    display: none;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 300;
+    background-color: #212529 !important;
+}
+.waiting_data *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+.waiting_data h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+.waiting_data h4{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: center;
+}
+
+.waiting_data button{
+    margin-top: 20px !important;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+option, select
+{
+    color: black !important;
+    width: 100%;
+    height: 42px;
+    font-size: 26px;
+}
+
+.alert{
+    background-color: #801818 !important;
+}
+
+.success{
+    background-color: #397f25 !important;
+}
