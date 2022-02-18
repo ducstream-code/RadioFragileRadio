@@ -282,3 +282,47 @@ option, select
 .success{
     background-color: #397f25 !important;
 }
+
+
+.playlists
+{
+    display: grid;
+    grid-template-columns: repeat(2,2fr);
+    grid-gap: 30px;
+}
+
+.array_wraper
+{
+    max-height: 540px;
+    overflow-y: scroll;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
