@@ -298,9 +298,21 @@ option, select
 }
 
 
+.account_actions
+{
+    width: 100%;
+}
+.create_account
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
 
-
-
+.create_account input
+{
+    width: 33%;
+}
 
 
 
