@@ -9,12 +9,7 @@ include '../includes/db.php'
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="icon" type="image/png" href=""/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <? include '../includes/head.php'?>
     <script src="../js/accounts.js"></script>
 
 
@@ -24,20 +19,23 @@ include '../includes/db.php'
 
 <body>
 
-<div class="container">
+<div class="container flex  h-screen pr-16">
+    <? include "../includes/sidebar.php"; ?>
 
-    <div class="main">
+    <div class="main left-16">
         <div class="topbar">
             <h3>Clients</h3>
+            <div class="actions">
+
+            </div>
         </div>
         <div class="wrap">
             <div class="customers_dropdown account_actions">
 
                 <form action="../php/createAccount.php" method="post" class="customers_select creation create_account">
-                    <input type="text" name="username" placeholder="Username">
-                    <input type="text" name="password" placeholder="Mot de passe">
-                    <button>Créer le compte</button>
-                    <h2 style="color: <?=$_GET['type']?>"><?=$_GET['message']?></h2>
+                    <input class="rounded p-1 border-solid border-2 border-indigo-600" type="text" name="username" placeholder="Username">
+                    <input class="rounded p-1 border-solid border-2 border-indigo-600" type="password" name="password" placeholder="Mot de passe">
+                    <button class="bg-green-500 rounded p-2">Créer le compte</button>
 
                 </form>
             </div>
@@ -47,7 +45,7 @@ include '../includes/db.php'
                     <h3>Comptes</h3>
                     <input type="text">
                 </div>
-                <button><ion-icon name="cloud-download-outline"></ion-icon></button>
+                <button ><ion-icon name="cloud-download-outline"></ion-icon></button>
             </div>
             <table class="orders_table customers_table" cellspacing="0" cellpadding="0">
                 <thead>
@@ -66,8 +64,8 @@ include '../includes/db.php'
                         <tr id="acc_<?=$account['id']?>">
                             <td><?=$account['id']?></td>
                             <td><?=$account['username']?></td>
-                            <td><?=$account['password']?></td>
-                            <td><button onclick="deleteAccount(<?=$account['id']?>)">Supprimer</button></td>
+                            <td ><?=$account['password']?></td>
+                            <td><button class="bg-red-500 rounded p-2" onclick="deleteAccount(<?=$account['id']?>)">Supprimer</button></td>
 
                         </tr>
                 <?php
@@ -76,7 +74,7 @@ include '../includes/db.php'
 
 
                 </tbody>
-
+            </table>
         </div>
     </div>
 </div>

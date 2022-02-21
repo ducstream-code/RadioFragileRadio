@@ -9,29 +9,23 @@ include '../includes/db.php'
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src=".."></script>
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="icon" type="image/png" href=""/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
+    <? include '../includes/head.php'?>
+    <script src="../js/index.js"></script>
 
     <title>Music control</title>
 </head>
 
 <body>
-    <div class="main">
+<div class="container  flex  h-screen pr-16">
+    <? include "../includes/sidebar.php"; ?>
+
+    <div class="main left-16">
 
         <div class="topbar">
             <h3>Music Control</h3>
-            <div id="test"></div>
+
             <div class="actions">
-                <button onclick="PlaylistSelection()" >Gestion des playlists</button>
-                <button>Gérer les comptes</button>
+                <button class="bg-orange-500 rounded p-2" onclick="PlaylistSelection()">Créer une playlist</button>
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
@@ -54,6 +48,7 @@ include '../includes/db.php'
                 <table class="orders_table" cellspacing="0" cellpadding="0">
                     <thead>
                     <td class="check-column border_bottom">Edit</td>
+                    <td class="check-column border_bottom">Delete</td>
                     <th class="column_title border_bottom">Nom</th>
                     <th class="column-order_date border_bottom">Auteur</th>
                     <th class="column-order_status border_bottom">Durée</th>
@@ -61,59 +56,30 @@ include '../includes/db.php'
 
                     </thead>
                     <tbody id="table_body">
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
 
-                    </tr>
+                    <?php
+                    $stmt = $db->prepare("SELECT * FROM playlist WHERE Time > NOW() ");
+                    $stmt->execute();
+                    $nextPl = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($nextPl as $key => $nextPlaylist){
+                        ?>
+                        <tr id="playlist<?=$nextPlaylist['id']?>">
+                            <td class="check-column border_bottom"><button class="bg-blue-500 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)">Edit</button> </td>
+                            <td class="check-column border_bottom"><button class="bg-red-500 rounded p-2" onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)">Delete</button> </td>
+                            <td class="column_title border_bottom"><?=$nextPlaylist['name'] ?></td>
+                            <td class="column-order_date border_bottom"><?=$nextPlaylist['username'] ?></td>
+                            <td class="column-order_status border_bottom"><?= gmdate("H:i:s", $nextPlaylist['duration']);?></td>
+                            <td class="column-order_total border_bottom"><?=$nextPlaylist['Time'] ?></td>
 
+                        </tr>
+                    <?php
+                    }
+                    ?>
 
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
-
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
-
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
-
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
-
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom"><button>Edit</button> </td>
-                        <td class="column_title border_bottom">Lo-Fi</td>
-                        <td class="column-order_date border_bottom">Aurélien</td>
-                        <td class="column-order_status border_bottom">55:26</td>
-                        <td class="column-order_total border_bottom">13-12-2022 à 21h45</td>
-
-                    </tr>
                     </tbody>
                     <tfoot>
                     <td class="check-column border_bottom">Edit</td>
+                    <td class="check-column border_bottom">Delete</td>
                     <th class="column_title border_bottom">Nom</th>
                     <th class="column-order_date border_bottom">Auteur</th>
                     <th class="column-order_status border_bottom">Durée</th>
@@ -150,25 +116,6 @@ include '../includes/db.php'
                         <td class="column-order_date border_bottom">8:14:25</td>
                         <td class="column-order_status border_bottom">18-02-2022</td>
                     </tr>
-                    <tr>
-                        <td class="check-column border_bottom">AUrelien</td>
-                        <td class="column_title border_bottom">122</td>
-                        <td class="column-order_date border_bottom">8:14:25</td>
-                        <td class="column-order_status border_bottom">18-02-2022</td>
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom">AUrelien</td>
-                        <td class="column_title border_bottom">122</td>
-                        <td class="column-order_date border_bottom">8:14:25</td>
-                        <td class="column-order_status border_bottom">18-02-2022</td>
-                    </tr>
-                    <tr>
-                        <td class="check-column border_bottom">AUrelien</td>
-                        <td class="column_title border_bottom">122</td>
-                        <td class="column-order_date border_bottom">8:14:25</td>
-                        <td class="column-order_status border_bottom">18-02-2022</td>
-                    </tr>
-
                     </tbody>
                     <tfoot>
                     <td class="check-column border_bottom">Nom</td>
@@ -182,5 +129,35 @@ include '../includes/db.php'
 
         </div>
     </div>
+</div>
+
+    <form action="../php/createNewPlaylist.php" method="post" id="choosePL" class="waiting_data">
+        <h3>Creer une playlist</h3>
+        <input name="username" type="text" placeholder="Nom du créateur">
+        <input name="name" type="text" placeholder="Nom playlist">
+        <input name="date" type="datetime-local">
+
+
+
+        <button type="button" class="alert" onclick="ClosePlaylistSelection()">Annuler</button>
+        <button class="success" onclick="createPlaylist()">Créer la playlist</button>
+    </form>
+    <div class="waiting_data_displayed" id="editPl">
+        <h3>Editer une playlist</h3>
+        <div style="display: flex; flex-wrap: nowrap">
+        <input id="changeDate" name="date" type="datetime-local">
+        <button id="changeDateButton" onclick="changeDate(idPl)">Changer la date</button>
+        </div>
+        <div class="music_list" id="PlListEditor">
+            <div class="one_music">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                <h5>Musique</h5>
+            </div>
+        </div>
+
+
+        <button class="success" onclick="closePledit()">Fermer</button>
+    </div>
+    <div id="greybackground" class="greybackground"></div>
 </body>
 </html>

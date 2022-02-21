@@ -16,12 +16,13 @@ body, html
     padding: 0;
     margin: 0;
     overflow-scrolling: unset;
+
 }
 .container
 {
-    width: 100%;
+    width: 95%;
     overflow: -moz-hidden-unscrollable;
-    position: relative;
+
     margin: 0 !important;
     padding: 0 !important;
 
@@ -29,7 +30,7 @@ body, html
 
 .main{
     position: absolute;
-    width: 100%;
+    width: calc(100% - 64px);
 
     min-height: 100vh;
     background: #F0F0F1;
@@ -40,7 +41,7 @@ body, html
     width: 100%;
     position: fixed;
     height: 75px;
-    padding: 3px 40px 25px 40px;
+    padding: 3px 120px 25px 40px;
     background: white;
     display: flex;
     flex-direction: row;
@@ -67,7 +68,7 @@ body, html
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 300px;
+    width: 400px;
 }
 .actions .create
 {
@@ -212,7 +213,7 @@ body, html
 
 .waiting_data{
     display: none;
-    position: absolute;
+    position: fixed;
     top: 40%; right: 50%;
     transform: translate(50%,-50%);
     height: 420px;
@@ -228,11 +229,12 @@ body, html
 }
 
 .greybackground{
+    top: 0;
     display: none;
     opacity: 0.5;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 300;
     background-color: #212529 !important;
 }
@@ -297,6 +299,10 @@ option, select
     overflow-y: scroll;
 }
 
+.actions button
+{
+    min-width: 120px;
+}
 
 .account_actions
 {
@@ -314,21 +320,251 @@ option, select
     width: 33%;
 }
 
+.waiting_data{
+    position: fixed;
+    top: 40%; right: 50%;
+    transform: translate(50%,-50%);
+    height: 620px;
+    width: 500px !important;
+    background-color: rgba(255,255,255,0.13);
+    margin-top: 120px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 35px;
+}
+.waiting_data *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+.waiting_data h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.waiting_data input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: white;
+}
+.waiting_data button{
+    margin-top: 50px !important;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.waiting_data_displayed{
+    display: none;
+    position: fixed;
+    top: 40%; right: 50%;
+    transform: translate(50%,-50%);
+    height: 620px;
+    width: 500px !important;
+    background-color: rgba(255,255,255,0.13);
+    margin-top: 120px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 35px;
+    z-index: 500 !important;
+}
+.waiting_data_displayed *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+.waiting_data_displayed h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.waiting_data_displayed input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: white;
+}
+.waiting_data_displayed button{
+
+    width: 200px;
+    height: 60px;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.waiting_data input::placeholder
+{
+    color: white;
+}
 
 
+.little_button
+{
+    width: 30px !important;
+    height: 15px !important;
+
+}
+ion-icon
+{
+    font-size: 2em;
+
+}
+
+.one_music
+{
+    width: 100%;
+
+    display: flex;
+    align-items: center
+}
+.one_music ion-icon
+{
+    margin-right: 20px;
+    cursor: pointer;
+}
+.music_list
+{
+    margin-top: 30px;
+    padding-bottom: 15px;
+    height: 400px;
+    overflow-y: scroll;
+}
 
 
+.cardBox{
+
+    margin-top: 80px;
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 30px;
 
 
+}
+.cardBox .card{
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.cardBox .card .numbers{
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: var(--blue);
+}
 
 
+.cardBox .card .cardName{
+    color: var(--black2);
+    font-size: 1.1em ;
+    margin-top: 5px;
 
+}
+.cardBox .card .iconBx{
+    font-size: 2.0em;
+    color: var(--black2);
+}
 
+.cardBox .card:hover{
+    background: var(--blue);
+}
 
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .iconBx,
+.cardBox .card:hover .cardName{
+    color: #fff;
+}
 
+.details{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
 
+}
 
+.details .recentOrders{
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: scroll;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+}
 
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardHeader h2{
+    font-weight: 600;
+    color: var(--blue);
+}
 
 
 

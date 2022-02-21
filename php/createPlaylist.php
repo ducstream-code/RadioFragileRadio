@@ -7,6 +7,14 @@ include '../includes/db.php';
 $list = $_GET['list'];
 $idPlaylist = $_GET['idPL'];
 
+$stmt = $db->prepare("SELECT duration FROM playlist WHERE id = :id");
+$stmt->execute([
+    'id'=>$idPlaylist,
+]);
+$duration = $stmt->fetch();
+
+$durée = $duration['duration'];
+
 $decodelist = json_decode($list);
 
 
@@ -19,8 +27,22 @@ foreach ($decodelist as $music){
         'id_playlist' => intval($idPlaylist),
     ]);
 
+    $stmt = $db->prepare("SELECT duration FROM musics WHERE id = :id");
+    $stmt->execute([
+        'id' => intval($music),
+    ]);
+    $musicDuration = $stmt->fetch();
 
-
+    $durée += $musicDuration['duration'];
+echo $durée;
 }
+
+$sql = "UPDATE playlist SET duration = $durée WHERE id = :id";
+$stmt = $db->prepare($sql);
+$stmt->execute([
+    'id' => intval($idPlaylist),
+]);
+
+
 
 

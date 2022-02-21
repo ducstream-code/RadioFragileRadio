@@ -9,115 +9,126 @@ include '../includes/db.php'
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <script
-            src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script>
+    <? include '../includes/head.php'?>
     <script src="../js/panel.js"></script>
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="icon" type="image/png" href=""/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
-
-    <title>Musiques</title>
+    <title>Mon panel</title>
 </head>
 
-<body onload="fetchMusic()">
+<body>
+<div class="container flex  h-screen pr-16">
+    <? include "../includes/sidebar.php"; ?>
 
-<div class="container">
-
-    <div class="main">
-
+    <div class="main left-16">
         <div class="topbar">
-            <h3>Music list</h3>
-            <div id="test"></div>
+            <h3>Mon Panel</h3>
             <div class="actions">
-            <button onclick="PlaylistSelection()" >Add to a playlist</button>
-                <button>See music in the playlist</button>
-                <!--onclick="createPlaylist()" -->
+                <button class="bg-orange-500 rounded p-2" onclick="PlaylistSelection()">Créer une playlist</button>
+
             </div>
         </div>
-
-        <div class="wrap">
-            <div class="actions">
-                <div class="customers_dropdown">
-                    <select class="customers_select">
-                        <option value="-1">Toutes les musiques</option>
-                    </select>
+        <div class="cardBox">
+            <div class="card">
+                <div>
+                    <div class="numbers">Date</div>
+                    <div class="cardName">My next playlist</div>
                 </div>
+                <div class="iconBx"><ion-icon name="eye-outline"></ion-icon></div>
             </div>
-
+            <div class="card">
+                <div>
+                    <div class="numbers">3</div>
+                    <div class="cardName">Mon nombre de playlist</div>
+                </div>
+                <div class="iconBx"><ion-icon name="cart-outline"></ion-icon></ion-icon></ion-icon></div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">Créer</div>
+                    <div class="cardName">Créer une nouvelle playlist</div>
+                </div>
+                <div class="iconBx"><ion-icon name="person-add-outline"></ion-icon></ion-icon></div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="numbers">Show</div>
+                    <div class="cardName">Afficher la programmation</div>
+                </div>
+                <div class="iconBx"><ion-icon name="cash-outline"></ion-icon></ion-icon></div>
+            </div>
+        </div>
+        <div class="wrap">
             <div class="customers_table_actions">
                 <div class="customers_table_left">
-                    <h3>Musics</h3>
-                    <input type="text">
+                    <h3>My playlists</h3>
                 </div>
-                <button><ion-icon name="cloud-download-outline"></ion-icon></button>
             </div>
-
-            <table class="orders_table" cellspacing="0" cellpadding="0">
+            <table class="orders_table customers_table " cellspacing="0" cellpadding="0">
                 <thead>
-                    <td class="check-column border_bottom"><input type="checkbox"></td>
-                    <th class="column_title border_bottom">Titre</th>
-                    <th class="column-order_date border_bottom">Artiste</th>
-                    <th class="column-order_status border_bottom">Album</th>
-                    <th class="column-order_total border_bottom">Genre</th>
-                    <th class="column-order_total border_bottom">Année</th>
-                    <th class="column-order_total border_bottom">duration</th>
+                <th>nom</th>
+                <th>durée</th>
+                <th>date</th>
+                <th>action</th>
+                <th>action 2 </th>
+
                 </thead>
                 <tbody id="table_body">
-                    <tr>
-                        <td class="check-column border_bottom"><input type="checkbox"></td>
-                        <td class="column_title border_bottom">Lose Yourself </td>
-                        <td class="column-order_date border_bottom">Eminem</td>
-                        <td class="column-order_status border_bottom">Curtain Call: The Hits</td>
-                        <td class="column-order_total border_bottom">Rap/Hip Hop</td>
-                        <td class="column-order_total border_bottom">2005</td>
-                        <td class="column-order_total border_bottom">327</td>
-                    </tr>
+                <?php
+                $stmt = $db->prepare("SELECT * FROM playlist WHERE username = :username");
+                $stmt->execute([
+                        'username'=>'test'
+                ]);
+                $nextPl = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($nextPl as $key => $nextPlaylist){
+                ?>
+                <tr id="playlist<?=$nextPlaylist['id']?>">
+                    <td class=" border_bottom"><?=$nextPlaylist['name'] ?></td>
+                    <td class=" border_bottom"><?= gmdate("H:i:s", $nextPlaylist['duration']);?></td>
+                    <td class=" border_bottom"><?=$nextPlaylist['Time'] ?></td>
+                    <td class=" border_bottom"><button class="bg-blue-500 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)">Edit</button> </td>
+                    <td class="border_bottom" ><button class="bg-red-500 rounded p-2 " onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)">Supprimer</button> </td>
+
+                </tr>
+                <?php
+                    }
+                    ?>
+
+
                 </tbody>
-                <tfoot>
-                    <td class="check-column border_bottom"><input type="checkbox"></td>
-                    <th class="column_title border_bottom">Titre</th>
-                    <th class="column-order_date border_bottom">Artiste</th>
-                    <th class="column-order_status border_bottom">Album</th>
-                    <th class="column-order_total border_bottom">Genre</th>
-                    <th class="column-order_total border_bottom">Année</th>
-                    <th class="column-order_total border_bottom">duration</th>
-                </tfoot>
             </table>
+
         </div>
     </div>
 </div>
 
-<div id="choosePL" class="waiting_data">
-    <h3>Create Playlist</h3>
+<div class="waiting_data_displayed" id="editPl">
+    <h3>Creer une playlist</h3>
+    <div style="display: flex; flex-wrap: nowrap">
+        <input id="changeDate" name="date" type="datetime-local">
+        <button id="changeDateButton" onclick="changeDate(idPl)">Changer la date</button>
+    </div>
+    <div class="music_list" id="PlListEditor">
+        <div class="one_music">
+            <ion-icon name="close-circle-outline"></ion-icon>
+            <h5>Musique</h5>
+        </div>
+    </div>
 
-    <select id="PLselect">
-        <option value="">--Please choose a playlist--</option>
-        <?php
-            $stmt = $db->prepare("SELECT nom, id FROM playlist");
-            $stmt->execute();
-            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($res as $key => $playlist){
-                ?>
-                <option value="<?=$playlist['id']?>"><?=$playlist['nom']?></option>
-        <?php
-            }
-        ?>
 
-    </select>
-
-    <button class="alert" onclick="ClosePlaylistSelection()">Add more musics</button>
-    <button class="success" onclick="createPlaylist()">Add title to the playlist</button>
+    <button class="success" onclick="closePledit()">Fermer</button>
 </div>
 
+<form action="../php/createNewPlaylist.php" method="post" id="choosePL" class="waiting_data">
+    <h3>Creer une playlist</h3>
+    <input name="username" type="text" placeholder="Nom du créateur">
+    <input name="name" type="text" placeholder="Nom playlist">
+    <input name="date" type="datetime-local">
+
+
+
+    <button type="button" class="alert" onclick="ClosePlaylistSelection()">Annuler</button>
+    <button class="success" onclick="createPlaylist()">Créer la playlist</button>
+</form>
 <div id="greybackground" class="greybackground"></div>
-
-
 </body>
+
 </html>

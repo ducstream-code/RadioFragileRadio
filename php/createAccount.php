@@ -8,6 +8,16 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 
+if ((!isset($username)) || empty($username)) { //verify if $username is set
+    header('location: /admin/accounts.php??message=Un username est necessaire.&type=danger');
+    exit;
+}
+
+if ((!isset($password)) || empty($password)) { //verify if $password is set
+    header('location: /admin/accounts.php??message=Un mot de passe est necessaire.&type=danger');
+    exit;
+}
+
 
 //recuperation du mail pour voir si il existe déjà dans la bdd
 $sql = "SELECT username FROM music_users WHERE username = :username";

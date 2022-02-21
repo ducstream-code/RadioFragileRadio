@@ -1,79 +1,64 @@
-let page = 30
-let pos = 0
-let musicList =[]
-
-
-function f() {
-    $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {
-            page+=30
-            fetchMusic()
-        }
-    });
-}
-setTimeout(f,500)
-
-function fetchMusic(){
-
-    const req = new XMLHttpRequest();
-    req.onreadystatechange = function()  {
-        if(req.readyState === 4 ){
-            const data = req.response;
-            const div = document.getElementById('table_body');
-            div.innerHTML = data;
-        }
-    };
-    req.open('GET', '../php/getMusic.php?limit='+page);
-    req.send();
-}
-
-function getIdMusic(id){
-
-    musicList.splice(pos,0,id)
-    pos+=1
-    console.log(musicList)
-    console.log(pos)
-    document.getElementById(id).setAttribute("onChange", "removeElement(id)");
-}
-
-function removeElement(id){
-    let value = musicList.indexOf(id);
-
-    musicList.splice(value, 1); // 2nd parameter means remove one item only
-    pos+=1
-    document.getElementById(id).setAttribute("onChange", "getIdMusic(id)");
-    console.log(musicList)
-
-}
-
-function createPlaylist(){
-    let PLselector = document.getElementById('PLselect')
-    let idPL = PLselector.value;
-    let numberArray = musicList.map(Number);
-    let list = JSON.stringify(numberArray)
-    console.log(JSON.stringify(numberArray))
-
-    const req = new XMLHttpRequest();
-    req.onreadystatechange = function()  {
-        if(req.readyState === 4 ){
-            const data = req.response;
-            const div = document.getElementById('test');
-            div.innerHTML = data;
-            ClosePlaylistSelection()
-        }
-    };
-    req.open('GET', '../php/createPlaylist.php?idPL='+idPL+'&list='+list);
-    req.send();
-
-}
-
 function PlaylistSelection(){
     document.getElementById('greybackground').style.display="block"
     document.getElementById('choosePL').style.display="block"
 }
 
-function ClosePlaylistSelection(){
-    document.getElementById('greybackground').style.display="none"
-    document.getElementById('choosePL').style.display="none"
+function editPlaylist(id){
+    document.getElementById('editPl').style.display="block";
+    document.getElementById('greybackground').style.display="block"
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            const data = req.response;
+            const div = document.getElementById('PlListEditor');
+            div.innerHTML = data;
+            document.getElementById('changeDateButton').setAttribute("onclick", "changeDate("+id+")");
+
+
+        }
+    };
+    req.open('GET', '../php/getMusicFromPl.php?id='+id);
+    req.send();
 }
-//var numberArray = musicList.map(Number); transforme l'entièreté du tableau en int si il y a des strings dedans
+
+function changeDate(idPl){
+    let date = document.getElementById('changeDate').value
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            location.reload()
+        }
+    };
+    req.open('GET', '../php/changeDate.php?idPl='+idPl+'&date='+date);
+    req.send();
+
+}
+
+function removeFromPl(id,idPl){
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            let music = document.getElementById('music_'+id+'+'+idPl);
+            music.remove();
+        }
+    };
+    req.open('GET', '../php/rmMusicFromPl.php?id='+id+'&idPl='+idPl);
+    req.send();
+}
+
+function removePlaylist(idPl){
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            let playlist = document.getElementById('playlist'+idPl);
+            playlist.remove();
+        }
+    };
+    req.open('GET', '../php/deletePlaylist.php?idPl='+idPl);
+    req.send();
+}
+
+function closePledit(){
+    document.getElementById('greybackground').style.display="none"
+    document.getElementById('editPl').style.display="none"
+}
