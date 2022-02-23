@@ -12,16 +12,16 @@ $date = strtotime($date);
 
 
 if ((!isset($username)) || empty($username)) { //verify if $username is set
-    header('location: /admin/index.php??message=Un username est necessaire.&type=danger');
+    header('location: /admin/panel.php?message=Un username est necessaire.&type=danger');
     exit;
 }
 if ((!isset($name)) || empty($name)) { //verify if $username is set
-    header('location: /admin/index.php??message=Un nom de Playlist est necessaire.&type=danger');
+    header('location: /admin/panel.php?message=Un nom de Playlist est necessaire.&type=danger');
     exit;
 }
 
 if ((!isset($_POST['date'])) || empty($_POST['date'])) { //verify if $username is set
-    header('location: /admin/index.php??message=Une date est necessaire.&type=danger');
+    header('location: /admin/panel.php?message=Une date est necessaire.&type=danger');
     exit;
 }
 
@@ -34,7 +34,7 @@ $stmt->execute();
 $res = $stmt->fetch();
 
 if($res){
-    header('location: ../admin/index.php?message=Nom de playlist déjà utilisé&type=red');
+    header('location: ../admin/panel.php?message=Nom de playlist déjà utilisé&type=red');
     exit;
 }
 
@@ -45,4 +45,4 @@ $stmt->execute([
     'username' =>$username,
     'time'=> gmdate("Y-m-d H:i:s",$date)
 ]);
-header('location: ../admin/index.php?message=Playlist créée avec succès.&type=green');
+header('location: ../admin/panel.php?message=Playlist créée avec succès.&type=green');

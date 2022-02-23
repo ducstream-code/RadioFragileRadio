@@ -64,7 +64,8 @@ include('../includes/check_session.php');
                 </thead>
                 <tbody id="table_body">
                 <?php
-                    $stmt = $db->prepare("SELECT * FROM users");
+                    $stmt = $db->prepare("SELECT * FROM users WHERE id != :id");
+                    $stmt->bindParam(':id',$user['id']);
                     $stmt->execute();
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($res as $key => $account){
@@ -72,7 +73,7 @@ include('../includes/check_session.php');
                         <tr id="acc_<?=$account['id']?>">
                             <td><?=$account['id']?></td>
                             <td><?=$account['username']?></td>
-                            <td><?= $user['role'] == 0 ? 'admin' : 'pas admin' ?></td>
+                            <td><?= $account['role'] == 0 ? '<button onclick="goAdmin('.$account['id'].')" class="bg-indigo-500 p-2 rounded">pas admin</button>' : '<button onclick="goUnAdmin('.$account['id'].')" class="bg-green-500 p-2 rounded">admin</button>' ?></td>
                             <td ><?=$account['role']?></td>
                             <td><button class="bg-red-500 rounded p-2" onclick="deleteAccount(<?=$account['id']?>)">Supprimer</button></td>
 

@@ -27,38 +27,58 @@ include('../includes/check_session.php');
         <div class="topbar">
             <h3>Mon Panel</h3>
             <div class="actions">
-                <button class="bg-orange-500 rounded p-2" onclick="PlaylistSelection()">Créer une playlist</button>
 
             </div>
         </div>
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers">Date</div>
+                    <div class="numbers">
+                        <?php
+                $stmt = $db->prepare("SELECT Time FROM playlist WHERE username = :username AND Time > NOW() ");
+                $stmt->execute([
+                        'username'=>$user['username']
+                ]);
+                $nextPl = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($nextPl) {
+                    echo $nextPl['Time'];
+                }else{echo 'No playlist';}
+                ?>
+                    </div>
                     <div class="cardName">My next playlist</div>
                 </div>
-                <div class="iconBx"><ion-icon name="eye-outline"></ion-icon></div>
+                <div class="iconBx"><ion-icon name="calendar-clear-outline"></ion-icon></div>
             </div>
             <div class="card">
                 <div>
-                    <div class="numbers">3</div>
+                    <div class="numbers">
+                        <?php
+                        $stmt = $db->prepare("SELECT id FROM playlist WHERE username = :username ");
+                        $stmt->execute([
+                        'username'=>$user['username']
+                        ]);
+                        $plCount = $stmt->rowCount();
+                        if($plCount) {
+                        echo $plCount;
+                        }else{echo 'No playlist';}
+                        ?></div>
                     <div class="cardName">Mon nombre de playlist</div>
                 </div>
-                <div class="iconBx"><ion-icon name="cart-outline"></ion-icon></ion-icon></ion-icon></div>
+                <div class="iconBx"><ion-icon name="information-circle-outline"></ion-icon></div>
             </div>
             <div class="card">
-                <div>
+                <div onclick="PlaylistSelection()">
                     <div class="numbers">Créer</div>
                     <div class="cardName">Créer une nouvelle playlist</div>
                 </div>
-                <div class="iconBx"><ion-icon name="person-add-outline"></ion-icon></ion-icon></div>
+                <div class="iconBx"><ion-icon name="add-circle-outline"></ion-icon></ion-icon></div>
             </div>
             <div class="card">
                 <div>
                     <div class="numbers">Show</div>
                     <div class="cardName">Afficher la programmation</div>
                 </div>
-                <div class="iconBx"><ion-icon name="cash-outline"></ion-icon></ion-icon></div>
+                <div class="iconBx"><ion-icon name="calendar-outline"></ion-icon></ion-icon></div>
             </div>
         </div>
         <div class="wrap">
@@ -89,8 +109,8 @@ include('../includes/check_session.php');
                     <td class=" border_bottom"><?=$nextPlaylist['name'] ?></td>
                     <td class=" border_bottom"><?= gmdate("H:i:s", $nextPlaylist['duration']);?></td>
                     <td class=" border_bottom"><?=$nextPlaylist['Time'] ?></td>
-                    <td class=" border_bottom"><button class="bg-blue-500 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)">Edit</button> </td>
-                    <td class="border_bottom" ><button class="bg-red-500 rounded p-2 " onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)">Supprimer</button> </td>
+                    <td class=" border_bottom"><button class="bg-gray-300 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="create-outline"></ion-icon></button> </td>
+                    <td class="border_bottom" ><button class="bg-red-500 rounded p-2 " onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="trash-outline"></ion-icon></button> </td>
 
                 </tr>
                 <?php
