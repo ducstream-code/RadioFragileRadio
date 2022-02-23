@@ -92,6 +92,7 @@ include('../includes/check_session.php');
     <select id="PLselect">
         <option value="">--Please choose a playlist--</option>
         <?php
+        if($user['role'] !=0){
             $stmt = $db->prepare("SELECT name, id FROM playlist");
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -100,6 +101,16 @@ include('../includes/check_session.php');
                 <option value="<?=$playlist['id']?>"><?=$playlist['name']?></option>
         <?php
             }
+        }else{
+            $stmt = $db->prepare("SELECT name, id FROM playlist WHERE id = :id");
+            $stmt->execute(['id'=>$user['id']]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($res as $key => $playlist){
+                ?>
+                <option value="<?=$playlist['id']?>"><?=$playlist['name']?></option>
+                <?php
+            }
+        }
         ?>
 
     </select>

@@ -23,7 +23,11 @@ include('../includes/check_session.php');
 <body>
 
 <div class="container flex  h-screen pr-16">
-    <? include "../includes/sidebar.php"; ?>
+    <? include "../includes/sidebar.php";
+    if($user['role'] == 0){
+        header('Location: ../index.php');
+    }
+    ?>
 
     <div class="main left-16">
         <div class="topbar">
@@ -54,7 +58,8 @@ include('../includes/check_session.php');
                 <thead>
                 <th>id</th>
                 <th>Username</th>
-                <th>Password</th>
+                <th>Admin ?</th>
+                <th>role</th>
                 <th>Action</th>
                 </thead>
                 <tbody id="table_body">
@@ -67,7 +72,8 @@ include('../includes/check_session.php');
                         <tr id="acc_<?=$account['id']?>">
                             <td><?=$account['id']?></td>
                             <td><?=$account['username']?></td>
-                            <td ><?=$account['password']?></td>
+                            <td><?= $user['role'] == 0 ? 'admin' : 'pas admin' ?></td>
+                            <td ><?=$account['role']?></td>
                             <td><button class="bg-red-500 rounded p-2" onclick="deleteAccount(<?=$account['id']?>)">Supprimer</button></td>
 
                         </tr>

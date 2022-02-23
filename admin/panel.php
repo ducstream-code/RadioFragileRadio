@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 include '../includes/db.php';
 include('../includes/check_session.php');
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +80,7 @@ include('../includes/check_session.php');
                 <?php
                 $stmt = $db->prepare("SELECT * FROM playlist WHERE username = :username");
                 $stmt->execute([
-                        'username'=>'test'
+                        'username'=>$user['username']
                 ]);
                 $nextPl = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($nextPl as $key => $nextPlaylist){
@@ -122,7 +124,7 @@ include('../includes/check_session.php');
 
 <form action="../php/createNewPlaylist.php" method="post" id="choosePL" class="waiting_data">
     <h3>Creer une playlist</h3>
-    <input name="username" type="text" placeholder="Nom du créateur">
+    <input name="username" value="<?= $user['username'] ?>" type="text" placeholder="Nom du créateur" readonly>
     <input name="name" type="text" placeholder="Nom playlist">
     <input name="date" type="datetime-local">
 

@@ -20,7 +20,12 @@ include('../includes/check_session.php');
 
 <body>
 <div class="container  flex  h-screen pr-16">
-    <? include "../includes/sidebar.php"; ?>
+    <? include "../includes/sidebar.php";
+
+    if($user['role'] == 0){
+        header('Location: ../index.php');
+    }
+    ?>
 
     <div class="main left-16">
 
@@ -99,34 +104,12 @@ include('../includes/check_session.php');
 
                 <div class="customers_table_actions">
                     <div class="customers_table_left">
-                        <h3>Les createurs de playlists les plus actifs</h3>
+
                     </div>
                     <button><ion-icon name="cloud-download-outline"></ion-icon></button>
                 </div>
 
-                <table class="orders_table" cellspacing="0" cellpadding="0">
-                    <thead>
-                    <td class="check-column border_bottom">Nom</td>
-                    <th class="column_title border_bottom">Nombre de playlist</th>
-                    <th class="column-order_date border_bottom">Temps total des playlists</th>
-                    <th class="column-order_status border_bottom">Date prochaine playlist</th>
 
-                    </thead>
-                    <tbody id="table_body">
-                    <tr>
-                        <td class="check-column border_bottom">AUrelien</td>
-                        <td class="column_title border_bottom">122</td>
-                        <td class="column-order_date border_bottom">8:14:25</td>
-                        <td class="column-order_status border_bottom">18-02-2022</td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <td class="check-column border_bottom">Nom</td>
-                    <th class="column_title border_bottom">Nombre de playlist</th>
-                    <th class="column-order_date border_bottom">Temps total des playlists</th>
-                    <th class="column-order_status border_bottom">Date prochaine playlist</th>
-                    </tfoot>
-                </table>
             </div>
 
 
@@ -136,7 +119,7 @@ include('../includes/check_session.php');
 
     <form action="../php/createNewPlaylist.php" method="post" id="choosePL" class="waiting_data">
         <h3>Creer une playlist</h3>
-        <input name="username" type="text" placeholder="Nom du créateur">
+        <input name="username" value="<?= $user['username'] ?>" type="text" placeholder="Nom du créateur" readonly>
         <input name="name" type="text" placeholder="Nom playlist">
         <input name="date" type="datetime-local">
 
