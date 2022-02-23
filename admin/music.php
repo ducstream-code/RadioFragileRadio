@@ -3,7 +3,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include '../includes/db.php'
+include '../includes/db.php';
+include('../includes/check_session.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +15,7 @@ include '../includes/db.php'
     <script src="../js/music.js"></script>
     <title>Musiques</title>
 </head>
+<?= checkLoggedUser() ? '' : header('Location: ../index.php') ?>
 
 <body onload="fetchMusic()">
 <div id="greybackground" class="greybackground"></div>

@@ -3,7 +3,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include '../includes/db.php'
+include '../includes/db.php';
+include('../includes/check_session.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@ include '../includes/db.php'
 
     <title>Comptes</title>
 </head>
+<?= checkLoggedUser() ? '' : header('Location: ../index.php') ?>
 
 <body>
 
@@ -56,7 +59,7 @@ include '../includes/db.php'
                 </thead>
                 <tbody id="table_body">
                 <?php
-                    $stmt = $db->prepare("SELECT * FROM music_users");
+                    $stmt = $db->prepare("SELECT * FROM users");
                     $stmt->execute();
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($res as $key => $account){

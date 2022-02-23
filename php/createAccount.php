@@ -20,7 +20,7 @@ if ((!isset($password)) || empty($password)) { //verify if $password is set
 
 
 //recuperation du mail pour voir si il existe déjà dans la bdd
-$sql = "SELECT username FROM music_users WHERE username = :username";
+$sql = "SELECT username FROM users WHERE username = :username";
 $stmt = $db->prepare($sql);
 $stmt->bindParam('username', $username);
 $stmt->execute();
@@ -32,6 +32,6 @@ if($res){
 }
 
 
-$stmt = $db->prepare("INSERT INTO music_users (username, password) VALUES (:username, :password)");
-$stmt->execute(['username'=>$username, 'password' =>$password]);
+$stmt = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+$stmt->execute(['username'=>$username, 'password' =>hash('sha256',$password)]);
 header('location: ../admin/accounts.php?message=Compte crée avec succès.&type=green');

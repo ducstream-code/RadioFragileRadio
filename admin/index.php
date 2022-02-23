@@ -3,9 +3,12 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include '../includes/db.php'
+include '../includes/db.php';
+include('../includes/check_session.php');
+
 ?>
 
+<?= checkLoggedUser() ? '' : header('Location: ../index.php') ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
