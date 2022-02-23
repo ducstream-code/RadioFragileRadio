@@ -102,8 +102,8 @@ include('../includes/check_session.php');
         <?php
             }
         }else{
-            $stmt = $db->prepare("SELECT name, id FROM playlist WHERE id = :id");
-            $stmt->execute(['id'=>$user['id']]);
+            $stmt = $db->prepare("SELECT name, id FROM playlist WHERE username = :user");
+            $stmt->execute(['user'=>$user['username']]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($res as $key => $playlist){
                 ?>
