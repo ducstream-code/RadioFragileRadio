@@ -6,6 +6,7 @@
         crossorigin="anonymous"></script>
     <script src="../js/music.js"></script>
     <link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="../css/admin.css">
     <link rel="icon" type="image/png" href=""/>
     <meta charset="utf-8">
     <meta name="viewport" content="width-device-width, initial-scale=1">
