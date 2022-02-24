@@ -566,7 +566,11 @@ ion-icon
     color: var(--blue);
 }
 
+#musicList
+{
+    display: none;
 
+}
 
 
 

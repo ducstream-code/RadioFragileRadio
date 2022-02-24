@@ -107,7 +107,9 @@ include('../includes/check_session.php');
                 ?>
                 <tr id="playlist<?=$nextPlaylist['id']?>">
                     <td class=" border_bottom"><?=$nextPlaylist['name'] ?></td>
-                    <td class=" border_bottom"><?= gmdate("H:i:s", $nextPlaylist['duration']);?></td>
+                    <td class=" border_bottom">
+                        <?= gmdate("H:i:s",$nextPlaylist['duration']);
+                        ?></td>
                     <td class=" border_bottom"><?=$nextPlaylist['Time'] ?></td>
                     <td class=" border_bottom"><button class="bg-gray-300 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="create-outline"></ion-icon></button> </td>
                     <td class="border_bottom" ><button class="bg-red-500 rounded p-2 " onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="trash-outline"></ion-icon></button> </td>
@@ -126,18 +128,13 @@ include('../includes/check_session.php');
 </div>
 
 <div class="waiting_data_displayed" id="editPl">
-    <h3>Creer une playlist</h3>
+    <h3>Retirer des musiques</h3>
     <div style="display: flex; flex-wrap: nowrap">
-        <input id="changeDate" name="date" type="datetime-local">
-        <button id="changeDateButton" onclick="changeDate(idPl)">Changer la date</button>
     </div>
     <div class="music_list" id="PlListEditor">
-        <div class="one_music">
-            <ion-icon name="close-circle-outline"></ion-icon>
-            <h5>Musique</h5>
-        </div>
-    </div>
 
+    </div>
+<div id="test"></div>
 
     <button class="success" onclick="closePledit()">Fermer</button>
 </div>
@@ -146,7 +143,6 @@ include('../includes/check_session.php');
     <h3>Creer une playlist</h3>
     <input name="username" value="<?= $user['username'] ?>" type="text" placeholder="Nom du créateur" readonly>
     <input name="name" type="text" placeholder="Nom playlist">
-    <input name="date" type="datetime-local">
 
 
 

@@ -39,6 +39,9 @@ function removeFromPl(id,idPl){
     req.onreadystatechange = function()  {
         if(req.readyState === 4 ){
             let music = document.getElementById('music_'+id+'+'+idPl);
+            const data = req.response;
+            const div = document.getElementById('test');
+            div.innerHTML = data;
             music.remove();
         }
     };

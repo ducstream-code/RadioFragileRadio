@@ -121,9 +121,6 @@ include('../includes/check_session.php');
         <h3>Creer une playlist</h3>
         <input name="username" value="<?= $user['username'] ?>" type="text" placeholder="Nom du créateur" readonly>
         <input name="name" type="text" placeholder="Nom playlist">
-        <input name="date" type="datetime-local">
-
-
 
         <button type="button" class="alert" onclick="ClosePlaylistSelection()">Annuler</button>
         <button class="success" onclick="createPlaylist()">Créer la playlist</button>

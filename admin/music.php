@@ -18,6 +18,9 @@ include('../includes/check_session.php');
 <?= checkLoggedUser() ? '' : header('Location: ../index.php') ?>
 
 <body onload="fetchMusic()">
+<div id="musicList" class="h-3/6 w-64 left-3/4 top-24 bg-gray-300 rounded z-40 overflow-x-scroll p-4 fixed ">
+
+</div>
 <div id="greybackground" class="greybackground"></div>
 <div class="container flex  h-screen pr-16">
     <? include "../includes/sidebar.php"; ?>
@@ -28,8 +31,8 @@ include('../includes/check_session.php');
             <h3>Music list</h3>
             <div id="test"></div>
             <div class="actions">
-            <button class="bg-green-500 rounded p-2" onclick="PlaylistSelection()" >Add to a playlist</button>
-                <button class="bg-blue-500 rounded p-2">See music in the playlist</button>
+            <button class="bg-green-500 rounded p-2" onclick="PlaylistSelection()" >Choose the playlist</button>
+                <button id="showList" class="bg-blue-500 rounded p-2" onclick="getMusicInList()">Display selected musics</button>
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
@@ -114,9 +117,11 @@ include('../includes/check_session.php');
         ?>
 
     </select>
+    <input id="changeDate" name="date" type="datetime-local">
 
     <button class="alert" onclick="ClosePlaylistSelection()">Add more musics</button>
     <button class="success" onclick="createPlaylist()">Add title to the playlist</button>
+    <div class="text-red-500  mt-8 text-3xl" id="createPlResponse"></div>
 </div>
 
 

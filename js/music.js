@@ -49,21 +49,28 @@ function removeElement(id){
 function createPlaylist(){
     let PLselector = document.getElementById('PLselect')
     let idPL = PLselector.value;
+    console.log(idPL)
     let numberArray = musicList.map(Number);
     let list = JSON.stringify(numberArray)
+    let date = document.getElementById('changeDate').value
     console.log(JSON.stringify(numberArray))
 
     const req = new XMLHttpRequest();
     req.onreadystatechange = function()  {
         if(req.readyState === 4 ){
             const data = req.response;
-            const div = document.getElementById('test');
-            div.innerHTML = data;
-            ClosePlaylistSelection()
-            window.location='../admin/index.php'
+            if (data == 'ok'){
+                window.location="../admin/panel.php"
+            }else {
+
+                const div = document.getElementById('createPlResponse');
+                div.innerHTML = data;
+            }
+            //ClosePlaylistSelection()
+            //window.location='../admin/index.php'
         }
     };
-    req.open('GET', '../php/createPlaylist.php?idPL='+idPL+'&list='+list);
+    req.open('GET', '../php/createPlaylist.php?idPL='+idPL+'&list='+list+'&date='+date);
     req.send();
 
 }
@@ -78,3 +85,40 @@ function ClosePlaylistSelection(){
     document.getElementById('choosePL').style.display="none"
 }
 //var numberArray = musicList.map(Number); transforme l'entièreté du tableau en int si il y a des strings dedans
+
+function getMusicInList(){
+
+    document.getElementById('musicList').style.display="block";
+    document.getElementById('showList').innerHTML="Hide selected musics";
+    document.getElementById('showList').setAttribute('onclick','hideMusicList()');
+    let numberArray = musicList.map(Number);
+    let list = JSON.stringify(numberArray)
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            const data = req.response;
+            const div = document.getElementById('musicList')
+            div.innerHTML = data;
+
+        }
+    };
+    req.open('GET', '../php/displayList.php?list='+list);
+    req.send();
+}
+
+function removeMusicFromList(id){
+    const checkbox = document.getElementById(id);
+    document.getElementById(id).checked = false
+    let value = musicList.indexOf(id);
+    const listElement = document.getElementById('list_'+id);
+    listElement.remove();
+    musicList.splice(value, 1); // 2nd parameter means remove one item only
+    pos+=1
+    checkbox.setAttribute("onChange", "getIdMusic(id)");
+}
+
+function hideMusicList(){
+    document.getElementById('musicList').style.display="none";
+    document.getElementById('showList').innerHTML="See music in the playlist";
+    document.getElementById('showList').setAttribute('onclick','getMusicInList()');
+}
