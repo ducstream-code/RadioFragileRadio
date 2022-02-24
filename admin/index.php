@@ -14,7 +14,7 @@ include('../includes/check_session.php');
 <head>
     <? include '../includes/head.php'?>
     <script src="../js/index.js"></script>
-
+    <script src="../js/calendar.js"></script>
     <title>Music control</title>
 </head>
 
@@ -29,7 +29,7 @@ include('../includes/check_session.php');
 
     <div class="main left-16">
 
-        <div class="topbar">
+        <div class="topbar z-20">
             <h3>Music Control</h3>
 
             <div class="actions">
@@ -37,7 +37,9 @@ include('../includes/check_session.php');
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
+        <div id="calendar" class="w-5/6 p-16 mt-16">
 
+        </div>
         <div class="wrap playlists">
             <div class="array_wraper">
                 <div class="actions">
@@ -95,25 +97,12 @@ include('../includes/check_session.php');
                     </tfoot>
                 </table>
             </div>
-            <div class="array_wraper">
-                <div class="actions">
-                    <div class="customers_dropdown">
 
-                    </div>
-                </div>
-
-                <div class="customers_table_actions">
-                    <div class="customers_table_left">
-
-                    </div>
-                    <button><ion-icon name="cloud-download-outline"></ion-icon></button>
-                </div>
-
-
-            </div>
 
 
         </div>
+
+
     </div>
 </div>
 

@@ -10,3 +10,5 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <link rel="stylesheet" href="../external/fullcalendar/lib/main.css">
+    <script src="../external/fullcalendar/lib/main.js"></script>
