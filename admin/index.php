@@ -14,7 +14,7 @@ include('../includes/check_session.php');
 <head>
     <? include '../includes/head.php'?>
     <script src="../js/index.js"></script>
-    <script src="../js/calendar.js"></script>
+    <script src="../js/adminCalendar.js"></script>
     <title>Music control</title>
 </head>
 
@@ -34,6 +34,7 @@ include('../includes/check_session.php');
 
             <div class="actions">
                 <button class="bg-orange-500 rounded p-2" onclick="PlaylistSelection()">Créer une playlist</button>
+                <button class="bg-orange-500 rounded p-2" onclick="showSlideOver()">Ajouter des musiques</button>
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
@@ -131,5 +132,41 @@ include('../includes/check_session.php');
         <button class="success" onclick="closePledit()">Fermer</button>
     </div>
     <div id="greybackground" class="greybackground"></div>
+<div id="slidershowcontainer" class="fixed inset-0 overflow-hidden hidden z-50 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div id="" class="absolute inset-0 overflow-hidden ">
+
+        <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity " aria-hidden="true"></div>
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+
+            <div id="sliderMain" class=" pointer-events-auto relative w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700">
+
+                <div class="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
+                    <button  type="button" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                        <span class="sr-only">Close panel</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg onclick="hideSlideOver()" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                    <div class="px-4 sm:px-6 flex space-x-4 fixed z-50 bg-white w-full">
+                        <h2 class="text-lg font-medium text-gray-900  " id="slide-over-title">Ajout de musiques à la base de données</h2>
+                    </div>
+                    <div class="relative mt-6 flex-1 px-4 sm:px-6">
+
+                        <div class="absolute inset-0 px-4 sm:px-6 mt-8">
+                            <!-- Replace with your content -->
+                            <!--Fin du remplacement -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -174,7 +174,7 @@ body, html
     width: 5ch;
     text-align: right;
 }
-.wrap table tbody tr:nth-child(even)
+.wrap .orders_table tbody tr:nth-child(even)
 {
     background-color: #fff;
 }
@@ -286,12 +286,7 @@ option, select
 }
 
 
-.playlists
-{
-    display: grid;
-    grid-template-columns: repeat(2,2fr);
-    grid-gap: 30px;
-}
+
 
 .array_wraper
 {
@@ -565,16 +560,20 @@ ion-icon
     font-weight: 600;
     color: var(--blue);
 }
+#sliderMain{
+    transform: translateX(100%);
+}
 
 #musicList
 {
     display: none;
 
 }
-
-
-
-
+.fc-myCustomButton-button
+{
+    background-color: red !important;
+    background: red !important;
+}
 
 
 

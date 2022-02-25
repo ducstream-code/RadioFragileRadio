@@ -3,6 +3,11 @@ function PlaylistSelection(){
     document.getElementById('choosePL').style.display="block"
 }
 
+function ClosePlaylistSelection(){
+    document.getElementById('greybackground').style.display="none"
+    document.getElementById('choosePL').style.display="none"
+}
+
 
 
 
@@ -63,4 +68,29 @@ function removePlaylist(idPl){
 function closePledit(){
     document.getElementById('greybackground').style.display="none"
     document.getElementById('editPl').style.display="none"
+}
+
+
+
+function translateElement(){
+    document.getElementById('sliderMain').style.transform="translateX(0px)"
+}
+
+function translateElement100(){
+    document.getElementById('sliderMain').style.transform="translateX(100%)"
+}
+
+function showSlideOver(){
+    document.getElementById('slidershowcontainer').style.display='block'
+    setTimeout(translateElement,100);
+
+    document.getElementById('body').style.overflow='hidden';
+}
+function hideSlideOver(){
+    setTimeout(translateElement100,0);
+    sleep(500).then(() => {
+        document.getElementById('slidershowcontainer').style.display='none'
+
+    });
+    document.getElementById('body').style.overflow='auto';
 }

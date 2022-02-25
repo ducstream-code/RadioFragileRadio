@@ -19,8 +19,10 @@ include('../includes/check_session.php');
 </head>
 <?= checkLoggedUser() ? '' : header('Location: ../index.php') ?>
 
-<body>
-<div class="container flex  h-screen pr-16">
+<body >
+<div class="w-full background -translate-x-full p-8 bg-gray-300 fixed top-0 z-50 " id="calendar"></div>
+
+<div class="container flex h-screen pr-16">
     <? include "../includes/sidebar.php"; ?>
 
     <div class="main left-16">
@@ -35,7 +37,7 @@ include('../includes/check_session.php');
                 <div>
                     <div class="numbers">
                         <?php
-                $stmt = $db->prepare("SELECT Time FROM playlist WHERE username = :username AND Time > NOW() ");
+                $stmt = $db->prepare("SELECT Time FROM playlist WHERE username = :username AND Time > NOW() ORDER BY Time ");
                 $stmt->execute([
                         'username'=>$user['username']
                 ]);
@@ -73,7 +75,7 @@ include('../includes/check_session.php');
                 </div>
                 <div class="iconBx"><ion-icon name="add-circle-outline"></ion-icon></ion-icon></div>
             </div>
-            <div class="card">
+            <div class="card" onclick="showPlanning()">
                 <div>
                     <div class="numbers">Show</div>
                     <div class="cardName">Afficher la programmation</div>
@@ -85,6 +87,8 @@ include('../includes/check_session.php');
             <div class="customers_table_actions">
                 <div class="customers_table_left">
                     <h3>My playlists</h3>
+                    <div class="text-2xl text-red-500 rounded bg-gray-200 p-2" id="ajaxResponse"></div>
+
                 </div>
             </div>
             <table class="orders_table customers_table " cellspacing="0" cellpadding="0">
@@ -92,6 +96,7 @@ include('../includes/check_session.php');
                 <th>nom</th>
                 <th>durée</th>
                 <th>date</th>
+                <th>Change date</th>
                 <th>action</th>
                 <th>action 2 </th>
 
@@ -111,6 +116,7 @@ include('../includes/check_session.php');
                         <?= gmdate("H:i:s",$nextPlaylist['duration']);
                         ?></td>
                     <td class=" border_bottom"><?=$nextPlaylist['Time'] ?></td>
+                    <td class="border_bottom"><?= $nextPlaylist['Time'] == NULL ? '<button class="bg-gray-300 rounded p-2\" onclick="emptyPlAlert()">Change Date</button>'  : '<input id="changeDate_'.$nextPlaylist['id'].'" name="date" type="datetime-local"><button onclick="changeDate('.$nextPlaylist['id'].')" class="p-1 bg-blue-300 rounded">Go</button>'?></td>
                     <td class=" border_bottom"><button class="bg-gray-300 rounded p-2" onclick="editPlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="create-outline"></ion-icon></button> </td>
                     <td class="border_bottom" ><button class="bg-red-500 rounded p-2 " onclick="removePlaylist(<?=$nextPlaylist['id'] ?>)"><ion-icon name="trash-outline"></ion-icon></button> </td>
 
@@ -134,7 +140,7 @@ include('../includes/check_session.php');
     <div class="music_list" id="PlListEditor">
 
     </div>
-<div id="test"></div>
+
 
     <button class="success" onclick="closePledit()">Fermer</button>
 </div>

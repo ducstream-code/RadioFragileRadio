@@ -2,6 +2,9 @@ let page = 30
 let pos = 0
 let musicList =[]
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function f() {
     $(window).scroll(function() {
@@ -89,8 +92,7 @@ function ClosePlaylistSelection(){
 function getMusicInList(){
 
     document.getElementById('musicList').style.display="block";
-    document.getElementById('showList').innerHTML="Hide selected musics";
-    document.getElementById('showList').setAttribute('onclick','hideMusicList()');
+
     let numberArray = musicList.map(Number);
     let list = JSON.stringify(numberArray)
     const req = new XMLHttpRequest();
@@ -117,8 +119,84 @@ function removeMusicFromList(id){
     checkbox.setAttribute("onChange", "getIdMusic(id)");
 }
 
-function hideMusicList(){
-    document.getElementById('musicList').style.display="none";
-    document.getElementById('showList').innerHTML="See music in the playlist";
-    document.getElementById('showList').setAttribute('onclick','getMusicInList()');
+
+
+function translateElement(){
+    document.getElementById('sliderMain').style.transform="translateX(0px)"
 }
+
+function translateElement100(){
+    document.getElementById('sliderMain').style.transform="translateX(100%)"
+}
+
+function showSlideOver(){
+    document.getElementById('slidershowcontainer').style.display='block'
+    setTimeout(translateElement,100);
+
+    document.getElementById('body').style.overflow='hidden';
+}
+function hideSlideOver(){
+    setTimeout(translateElement100,0);
+    sleep(500).then(() => {
+        document.getElementById('slidershowcontainer').style.display='none'
+
+    });
+    document.getElementById('body').style.overflow='auto';
+}
+
+function searchMusic(search){
+    const div = document.getElementById('searchResults')
+    if (search.length > 0) {
+        const req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                const data = req.response;
+                div.innerHTML = data;
+            }
+        };
+        req.open('GET', '../php/musicSearch.php?search=' + search);
+        req.send();
+    }else{div.innerHTML=""}
+}
+
+
+
+
+
+
+
+
+function showPlanning(){
+    document.getElementById('calendar').style.transform="translateX(0%)"
+}
+
+function hidePlanning(){
+    document.getElementById('calendar').style.transform="translateX(-100%)"
+
+}
+
+//Full calendat for planning visualisation
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        customButtons: {
+            myCustomButton: {
+                text: 'Close!',
+                click: function() {
+                    hidePlanning();
+                }
+            }
+        },
+        headerToolbar: { center: 'dayGridMonth,timeGridWeek,list', left: 'myCustomButton' }, // buttons for switching between views
+        initialView: 'timeGridWeek',
+        locale: 'fr',
+        events: '../php/getEvents.php',
+        contentHeight: 600,
+
+
+
+
+
+    });
+    calendar.render();
+});
