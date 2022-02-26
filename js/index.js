@@ -1,3 +1,8 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 function PlaylistSelection(){
     document.getElementById('greybackground').style.display="block"
     document.getElementById('choosePL').style.display="block"
@@ -8,7 +13,59 @@ function ClosePlaylistSelection(){
     document.getElementById('choosePL').style.display="none"
 }
 
+function Upload1music(){
 
+let uploadButton = document.getElementById('upload1button')
+
+
+
+    var myTitle = document.getElementById('uploadTitle')
+    var myArtist = document.getElementById('uploadArtist')
+    var myAlbum = document.getElementById('uploadAlbum')
+    var myYear = document.getElementById('uploadYear')
+    var myGenre = document.getElementById('uploadType')
+    var myFile = document.getElementById('uploadFile')
+    uploadButton.innerHTML = 'Uploading...';
+
+    // Get the files from the form input
+    var files = myFile.files;
+    var title = myTitle.value
+    var artist = myArtist.value
+    var album = myAlbum.value
+    var year = myYear.value
+    var genre = myGenre.value
+
+
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Select only the first file from the input array
+    var file = files[0];
+
+
+    // Add the file to the AJAX request
+    formData.append('titleAjax', title);
+    formData.append('artistAjax', artist);
+    formData.append('albumAjax', album);
+    formData.append('yearAjax', year);
+    formData.append('genreAjax', genre);
+    formData.append('fileAjax', file);
+
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function()  {
+        if(req.readyState === 4 ){
+            const data = req.response;
+            const div = document.getElementById('testReturn');
+            uploadButton.innerHTML = 'Upload another ?';
+
+            div.innerHTML = data;
+
+        }
+    };
+    req.open('POST', '../php/Upload1Music.php');
+    req.send(formData);
+
+}
 
 
 
@@ -72,24 +129,24 @@ function closePledit(){
 
 
 
-function translateElement(){
-    document.getElementById('sliderMain').style.transform="translateX(0px)"
+function translateElement2(){
+    document.getElementById('sliderMain2').style.transform="translateX(0px)"
 }
 
-function translateElement100(){
-    document.getElementById('sliderMain').style.transform="translateX(100%)"
+function translateElement1002(){
+    document.getElementById('sliderMain2').style.transform="translateX(100%)"
 }
 
-function showSlideOver(){
-    document.getElementById('slidershowcontainer').style.display='block'
-    setTimeout(translateElement,100);
+function showSlideOver2(){
+    document.getElementById('slidershowcontainer2').style.display='block'
+    setTimeout(translateElement2,100);
 
     document.getElementById('body').style.overflow='hidden';
 }
 function hideSlideOver(){
-    setTimeout(translateElement100,0);
+    setTimeout(translateElement1002,0);
     sleep(500).then(() => {
-        document.getElementById('slidershowcontainer').style.display='none'
+        document.getElementById('slidershowcontainer2').style.display='none'
 
     });
     document.getElementById('body').style.overflow='auto';

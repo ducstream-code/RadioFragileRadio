@@ -18,7 +18,7 @@ include('../includes/check_session.php');
     <title>Music control</title>
 </head>
 
-<body>
+<body id="body">
 <div class="container  flex  h-screen pr-16">
     <? include "../includes/sidebar.php";
 
@@ -34,7 +34,7 @@ include('../includes/check_session.php');
 
             <div class="actions">
                 <button class="bg-orange-500 rounded p-2" onclick="PlaylistSelection()">Créer une playlist</button>
-                <button class="bg-orange-500 rounded p-2" onclick="showSlideOver()">Ajouter des musiques</button>
+                <button class="bg-blue-500 rounded p-2" onclick="showSlideOver()">Ajouter des musiques</button>
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
@@ -150,7 +150,7 @@ include('../includes/check_session.php');
                     </button>
                 </div>
 
-                <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl bg-white w-full z-50">
                     <div class="px-4 sm:px-6 flex space-x-4 fixed z-50 bg-white w-full">
                         <h2 class="text-lg font-medium text-gray-900  " id="slide-over-title">Ajout de musiques à la base de données</h2>
                     </div>
@@ -158,6 +158,24 @@ include('../includes/check_session.php');
 
                         <div class="absolute inset-0 px-4 sm:px-6 mt-8">
                             <!-- Replace with your content -->
+                            <h3 class="text-2xl text-center text-blue-400 mt-8 mb-8">Add one music</h3>
+                            <div class="grid grid-cols-2 gap-4 m-2">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadTitle" placeholder="Title">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadArtist" placeholder="Artist">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadAlbum" placeholder="Album">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadYear" placeholder="Year">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadType" placeholder="Genre">
+                            </div>
+                            <input id="uploadFile" type="file" class="ml-4">
+                            <div id="testReturn" class="text-red-500 text-2xl text-center"></div>
+                            <button id="upload1button" class="mt-4 rounded p-2 bg-blue-500 hover:bg-blue-300   " onclick="Upload1music()">Upload the music</button>
+
+                            <div class="border-b-2 border-dashed border-gray-300 h-2 w-full mb-8 "</div>
+                            <h3 class="text-2xl text-center text-blue-400 mt-8 mb-8">Add many musics</h3>
+                            <input type="file">
+                            <button class="mt-4 rounded p-2 bg-blue-500 hover:bg-blue-300">Upload music (.zip)</button>
+                            <div class="border-2 border-dashed border-gray-300 w-full h-64 mt-4"></div>
+
                             <!--Fin du remplacement -->
 
                         </div>

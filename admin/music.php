@@ -31,6 +31,9 @@ include('../includes/check_session.php');
             <h3>Music list</h3>
             <div class="actions flex flex-row-reverse">
             <button id="showNext" class="bg-green-500 rounded p-2" onclick="showSlideOver();getMusicInList()">Next</button>
+                <?= $user['role'] !=0 ? '<button class="bg-blue-500 rounded p-2" onclick="showSlideOver20()">Ajouter des musiques</button>' : '' ?>
+
+
                 <!--onclick="createPlaylist()" -->
             </div>
         </div>
@@ -178,6 +181,61 @@ include('../includes/check_session.php');
         </div>
     </div>
 </div>
+
+<div id="slidershowcontainer2" class="fixed inset-0 overflow-hidden hidden z-50 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div id="" class="absolute inset-0 overflow-hidden ">
+
+        <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity " aria-hidden="true"></div>
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+
+            <div id="sliderMain2" class=" pointer-events-auto relative w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700">
+
+                <div class="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
+                    <button  type="button" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                        <span class="sr-only">Close panel</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg onclick="hideSlideOver2()" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl bg-white w-full z-50">
+                    <div class="px-4 sm:px-6 flex space-x-4 fixed z-50 bg-white w-full">
+                        <h2 class="text-lg font-medium text-gray-900  " id="slide-over-title">Ajout de musiques à la base de données</h2>
+                    </div>
+                    <div class="relative mt-6 flex-1 px-4 sm:px-6">
+
+                        <div class="absolute inset-0 px-4 sm:px-6 mt-8">
+                            <!-- Replace with your content -->
+                            <h3 class="text-2xl text-center text-blue-400 mt-8 mb-8">Add one music</h3>
+                            <div class="grid grid-cols-2 gap-4 m-2">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadTitle" placeholder="Title">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadArtist" placeholder="Artist">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadAlbum" placeholder="Album">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadYear" placeholder="Year">
+                                <input class="border-solid border-2 border-gray-300 rounded p-2 placeholder-black" type="text" id="uploadType" placeholder="Genre">
+                            </div>
+                            <input id="uploadFile" type="file" class="ml-4">
+                            <div id="testReturn" class="text-red-500 text-2xl text-center"></div>
+                            <button id="upload1button" class="mt-4 rounded p-2 bg-blue-500 hover:bg-blue-300   " onclick="Upload1music()">Upload the music</button>
+
+                            <div class="border-b-2 border-dashed border-gray-300 h-2 w-full mb-8 "</div>
+                        <h3 class="text-2xl text-center text-blue-400 mt-8 mb-8">Add many musics</h3>
+                        <input type="file">
+                        <button class="mt-4 rounded p-2 bg-blue-500 hover:bg-blue-300">Upload music (.zip)</button>
+                        <div class="border-2 border-dashed border-gray-300 w-full h-64 mt-4"></div>
+
+                        <!--Fin du remplacement -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <script>
 
