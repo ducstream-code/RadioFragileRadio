@@ -19,7 +19,7 @@ include('../includes/check_session.php');
 </head>
 
 <body id="body">
-<div class="container  flex  h-screen pr-16">
+<div class="container  flex  h-screen pr-16 ">
     <? include "../includes/sidebar.php";
 
     if($user['role'] == 0){

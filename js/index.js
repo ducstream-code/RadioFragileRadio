@@ -129,24 +129,24 @@ function closePledit(){
 
 
 
-function translateElement2(){
-    document.getElementById('sliderMain2').style.transform="translateX(0px)"
+function translateElement(){
+    document.getElementById('sliderMain').style.transform="translateX(0px)"
 }
 
-function translateElement1002(){
-    document.getElementById('sliderMain2').style.transform="translateX(100%)"
+function translateElement100(){
+    document.getElementById('sliderMain').style.transform="translateX(100%)"
 }
 
-function showSlideOver2(){
-    document.getElementById('slidershowcontainer2').style.display='block'
-    setTimeout(translateElement2,100);
+function showSlideOver(){
+    document.getElementById('slidershowcontainer').style.display='block'
+    setTimeout(translateElement,100);
 
     document.getElementById('body').style.overflow='hidden';
 }
 function hideSlideOver(){
-    setTimeout(translateElement1002,0);
+    setTimeout(translateElement100,0);
     sleep(500).then(() => {
-        document.getElementById('slidershowcontainer2').style.display='none'
+        document.getElementById('slidershowcontainer').style.display='none'
 
     });
     document.getElementById('body').style.overflow='auto';
